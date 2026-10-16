@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
 import '../../core/utils/feedback_helper.dart';
@@ -99,6 +100,9 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         await _auth.signup(email, password, name: _nameController.text.trim());
       }
+      // Tell the phone's password manager this sign-in worked, so it can
+      // offer to save the email and password.
+      TextInput.finishAutofillContext(shouldSave: true);
       // On success the auth listener swaps this screen out by itself.
     } catch (e) {
       if (mounted) FeedbackHelper.error(context, _friendlyAuthError(e));
@@ -225,7 +229,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _form(LTColors lt) {
-    return Column(
+    return AutofillGroup(
+      child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -253,6 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
             prefixIcon: Icons.person_rounded,
             textInputAction: TextInputAction.next,
             textCapitalization: TextCapitalization.words,
+            autofillHints: const [AutofillHints.name],
             maxLength: 40,
             onSubmitted: (_) => _emailFocus.requestFocus(),
           ),
@@ -266,6 +272,7 @@ class _LoginScreenState extends State<LoginScreen> {
           prefixIcon: Icons.mail_rounded,
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
+          autofillHints: const [AutofillHints.email, AutofillHints.username],
           onSubmitted: (_) => _passwordFocus.requestFocus(),
         ),
         const SizedBox(height: 16),
@@ -277,6 +284,9 @@ class _LoginScreenState extends State<LoginScreen> {
           prefixIcon: Icons.lock_rounded,
           obscureText: _obscure,
           textInputAction: TextInputAction.done,
+          autofillHints: [
+            _isLogin ? AutofillHints.password : AutofillHints.newPassword,
+          ],
           onSubmitted: (_) => _submit(),
           suffixIcon: IconButton(
             tooltip: _obscure ? 'Show password' : 'Hide password',
@@ -335,6 +345,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ],
+    ),
     );
   }
 }

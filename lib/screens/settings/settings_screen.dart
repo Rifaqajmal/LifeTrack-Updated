@@ -8,6 +8,7 @@ import '../../core/utils/feedback_helper.dart';
 import '../../core/utils/page_transitions.dart';
 import '../../providers/settings_provider.dart';
 import '../../providers/theme_provider.dart';
+import '../../services/notification_service.dart';
 import '../../widgets/lt_icon_button.dart';
 import '../../widgets/settings_widgets.dart';
 import '../../widgets/status_bar.dart';
@@ -48,6 +49,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _toggleMilestones(SettingsProvider s, bool v) async {
     final ok = await s.setMilestones(v);
     if (!ok && mounted) {
+      FeedbackHelper.info(context, 'Allow notifications in phone settings');
+    }
+  }
+
+  Future<void> _sendTest() async {
+    final ok = await NotificationService.scheduleTest();
+    if (!mounted) return;
+    if (ok) {
+      FeedbackHelper.success(
+          context, 'Test sent! Close the app and wait a few minutes.');
+    } else {
       FeedbackHelper.info(context, 'Allow notifications in phone settings');
     }
   }
@@ -156,6 +168,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           value: settings.milestonesEnabled,
                           onChanged: (v) => _toggleMilestones(settings, v),
                         ),
+                      ),
+                      SettingsTile(
+                        icon: Icons.send_rounded,
+                        color: AppColors.green,
+                        title: 'Send test notification',
+                        subtitle: 'Arrives within a few minutes',
+                        onTap: _sendTest,
                       ),
                     ],
                   ),

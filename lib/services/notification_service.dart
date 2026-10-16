@@ -26,6 +26,9 @@ class NotificationService {
   /// Reserved id for the milestone notification (birthday ids stay below it).
   static const int _milestoneId = 2100000000;
 
+  /// Reserved id for the "send test notification" button.
+  static const int _testId = 2100000001;
+
   static const NotificationDetails _details = NotificationDetails(
     android: AndroidNotificationDetails(
       _channelId,
@@ -115,6 +118,32 @@ class NotificationService {
     }
     if (milestones && ownDob != null) {
       await _scheduleMilestone(ownDob, current);
+    }
+  }
+
+  /// Schedules a one-off test notification through the same path as real
+  /// reminders, so the user can confirm delivery works on their phone.
+  /// Returns false if notifications are not allowed or scheduling failed.
+  static Future<bool> scheduleTest({
+    Duration delay = const Duration(minutes: 1),
+  }) async {
+    final allowed = await requestPermission();
+    if (!allowed) return false;
+    try {
+      await _plugin.zonedSchedule(
+        _testId,
+        'LifeTrack test 🎂',
+        'Notifications work! Your birthday reminders will arrive like this.',
+        tz.TZDateTime.now(tz.local).add(delay),
+        _details,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+      );
+      return true;
+    } catch (e) {
+      debugPrint('Could not schedule test notification: $e');
+      return false;
     }
   }
 

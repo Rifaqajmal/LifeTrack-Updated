@@ -39,13 +39,15 @@ LifeTrack grew with me through my BS Computer Science degree at UET Mardan:
 
 ## 📱 Screenshots
 
-> _Screenshots coming soon — add your own here once you've run the app. Suggested shots: Home, Birthday List, Birthday Detail, Add/Edit, Settings (dark mode)._
-
 <p align="center">
-  <img src="docs/screenshots/home.png" width="200" alt="Home screen" />
-  <img src="docs/screenshots/list.png" width="200" alt="Birthday list" />
-  <img src="docs/screenshots/detail.png" width="200" alt="Birthday detail" />
-  <img src="docs/screenshots/settings.png" width="200" alt="Settings" />
+  <img src="docs/screenshots/login.png" width="180" alt="Login" />
+  <img src="docs/screenshots/home.png" width="180" alt="Home" />
+  <img src="docs/screenshots/birthdays.png" width="180" alt="Birthdays" />
+</p>
+<p align="center">
+  <img src="docs/screenshots/detail.png" width="180" alt="Birthday detail" />
+  <img src="docs/screenshots/stats.png" width="180" alt="Life stats" />
+  <img src="docs/screenshots/profile.png" width="180" alt="Profile" />
 </p>
 
 ## 🛠️ Tech Stack
