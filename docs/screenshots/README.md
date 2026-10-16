@@ -1,2 +1,2 @@
 App screenshots used by the main project README:
-`login.png`, `home.png`, `birthdays.png`, `detail.png`, `stats.png`, `profile.png`.
+`login.jpg`, `home.jpg`, `birthdays.jpg`, `detail.jpg`, `stats.jpg`, `profile.jpg`.
