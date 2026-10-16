@@ -1,0 +1,14 @@
+# Copy this file to `key.properties` (same folder) and fill in your own
+# values. `key.properties` and your .jks keystore file must NEVER be
+# committed to git — they're already covered by .gitignore.
+#
+# To create a release keystore (one-time, run locally):
+#   keytool -genkey -v -keystore ~/lifetrack-release-key.jks -keyalg RSA \
+#     -keysize 2048 -validity 10000 -alias lifetrack
+#
+# Then fill in the path and passwords you used below.
+
+storePassword=your_keystore_password
+keyPassword=your_key_password
+keyAlias=lifetrack
+storeFile=/absolute/path/to/lifetrack-release-key.jks

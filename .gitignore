@@ -1,0 +1,59 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IDE
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+coverage/
+build_error_log.txt
+
+# Android
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/key.properties
+**/android/local.properties
+**/android/.kotlin/
+*.jks
+*.keystore
+
+# Firebase secrets (project-specific, never commit)
+**/android/app/google-services.json
+**/ios/Runner/GoogleService-Info.plist
+
+# iOS / macOS
+**/ios/**/DerivedData/
+**/ios/**/Pods/
+**/ios/**/xcuserdata/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+
+# Flutter generated
+**/ephemeral/
+**/GeneratedPluginRegistrant.*
+**/generated_plugin*
